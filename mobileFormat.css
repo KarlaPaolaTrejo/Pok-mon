@@ -1,0 +1,386 @@
+/*VARIABLES*/
+:root{
+    --marron: brown;
+    --blanco: rgb(230, 217, 210);
+    --gris: #555555;
+}
+
+/*TODA LA PÁGINA*/
+*{ 
+    /*Para quitar los márgenes*/
+    margin: 0;
+    padding: 0;
+    text-align: center; /*Alinear en el centro los textos*/
+    font-weight: bold;  /*Poner negrita*/
+}
+
+/*Fuente descargada*/
+@font-face{                                       /*Declaramos para usarla*/
+    font-family: Pokemon;                         /*Nombre puesto por nosotros*/
+    src: url("./letterFont/Pokemon\ Hollow.ttf"); /*Donde se coge*/
+}
+
+/*CABECERA*/
+header{ 
+    /* --marron: yellow; */          /*Si se usa en otra clase y se cambia el contenido a partir de ahí lo usa de este modo*/
+    background-color: var(--marron); /*Fondo del encabezado*/
+    height: 100%;                    /*Alto de la cabecera*/
+    top: 0;                          /*Se coloca arriba del todo*/
+    /*Texto*/
+    font-family: "Pokemon";          /*Fuente Descargada: Ponemos aquí el nombre de como hemos declarado la fuente descargada, arriba se declara*/
+    color: var(--blanco);            /*Color de la letra*/
+}
+
+/*Título de la cabecera*/
+#headTitle{
+    /*Posición*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;         /*Colocar delante del icono*/
+    height: 8vh;
+}
+
+/*Contenedor de la imagen de la cabecera*/
+#pokemonHead{
+    margin-top: -8vh;  /*Cuadrar imagen con el título*/
+}
+
+/*Imagen de la cabecera*/
+#imageHead{
+    align-items: center; /*Centrar imagen verticalmente*/
+    width: 5vh;
+    margin-left: 25vh;
+    opacity: 0.8;        /*Esté más transparente de lo normal*/
+    z-index: -1;         /*Poner bola atrás del título*/
+}
+
+/*CONTENEDOR - MAIN*/
+.container{
+    /*GRID*/
+    display: grid; /*Para hacerlo responsive, dividimos por filas y columnas*/
+    grid-template-columns: repeat(2, 1fr); /*Definimos el grosor de las columnas, ponemos para que sean 4 columnas con el mismo grosor(1fr)*/
+    /*Estructuramos de cómo se verán cada parte, dónde irá colocado*/
+    grid-template-areas: "button sunmoon"
+                         "title title"
+                         "image image"
+                         "number type" 
+                         "weightPokemon heightPokemon"
+                         "live speed"
+                         "defense attack"
+                         "defenseSpecial attackSpecial"
+                         "evolution evolution";
+    grid-gap: 5vh;  /*Separación entre elementos*/  
+    color: var(--gris);
+    margin-left: 5vh;
+}
+
+
+
+/*Atrás*/
+.button{
+    grid-area: button;
+    /*Centrar texto dentro del botón*/
+    margin-top: 5vh;
+    background-color: white;
+    border-radius: 2vh;
+    box-shadow: 0 0 3vh 10px rgba(0, 0, 0, 0.2); /*Sombreado alrededor*/
+    width: 15vh;
+    padding: 2vh;
+    color: var(--gris);
+    font-size: 5vh;
+    text-decoration: none; /*Quitar subrayado*/
+}
+
+.button:hover{ /*Cuando ponemos el ratón por encima*/
+    background-color: var(--marron);
+    box-shadow: 0 0 3vh 10px red;
+    color: var(--blanco);
+}
+
+.separate{
+    margin-left: 2vh;
+}
+
+/*MODO OSCURO - Modificado por JavaScript*/
+body.dark {   
+    background:  #363535; 
+}
+body.dark h1, body.dark label, body.dark #numberPokemon, body.dark  #typePokemon, body.dark #weightPokemon, 
+body.dark #heightPokemon, body.dark .fontColor, body.dark #liveNum, body.dark #speedNum, body.dark #defenseNum, 
+body.dark #attackNum, body.dark #attackSpecialNum, body.dark #defenseSpecialNum{   
+    color:var(--blanco);
+}
+
+body.dark .button {   
+    background:  rgb(33, 33, 33); 
+    color: var(--blanco);
+    box-shadow: 0 0 3vh 20px rgba(255, 0, 0, 0.2);
+}
+
+body.dark .button:hover {   
+    box-shadow: 0 0 3vh 10px red;
+    background-color: var(--marron); 
+    color: var(--blanco);
+}
+
+/* -----------Botón claro/oscuro----------- */
+#darkMode{
+    grid-area: sunmoon; /*GRID*/
+    position: fixed;
+    right: 40px;
+  }
+  #sun{
+    display:none;
+    height: 50px; 
+    width: 50px;
+  }
+  #moon{ 
+    height: 50px; 
+    width: 50px;
+  }
+  #sun:hover{
+    cursor:pointer;
+    box-shadow: 0 0 5px rgb(255, 255, 255);
+    transition: box-shadow 0.1s ease-in-out;
+    border-radius: 60%;
+  }
+  #moon:hover{
+    cursor:pointer;
+    box-shadow: 0 0 5px rgb(0, 0, 0);
+    transition: box-shadow 0.1s ease-in-out;
+    border-radius: 60%;
+  }
+  
+/*Texto*/
+#textPokemon {
+    grid-area: title;
+    margin-top: 20vh;
+    margin-bottom: -50vh;
+    position: absolute;
+    right: 0;
+    left: 0;
+    font-size: 7vh;
+    /*Efecto 3D*/
+    text-shadow: 0 1px 0 hsl(170, 90%, 71%),
+                 0 2px 0 hsl(174,5%,75%),
+                 0 3px 0 hsl(174,5%,70%),
+                 0 4px 0 hsl(174,5%,66%),
+                 0 5px 0 hsl(174,5%,64%),
+                 0 6px 0 hsl(174,5%,62%),
+                 0 7px 0 hsl(174,5%,61%),
+                 0 8px 0 hsl(174,5%,60%),
+
+                 0 0 5px rgba(0,0,0,.05);
+    /*Animación*/
+    animation-name: titlePokemon; /*Nombre del @keyframes*/
+    animation-duration: 5s;       /*Duración del efecto*/
+}
+
+
+@keyframes titlePokemon { /*Nombre del efecto / Título de tamaño pequeño a grande al iniciar la página*/
+    0% {  /*Inicio*/
+        transform: scale(0.1); /*Tamaño a la mitad*/
+    } 
+   
+    100% { /*Final*/
+        transform: scale(1); /*Tamaño real*/
+    }
+}
+
+/*Imagen*/
+#imagePokemon{
+    width: 50vh;
+}
+
+.positionPokemon{
+    /*Posición*/
+    grid-area: image;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    /* margin-left: -20vh; */
+    right: 0;
+    /*Animación*/
+    animation-name: imagePokemon; 
+    animation-duration: 6s; 
+}
+
+@keyframes imagePokemon { /*Se mueva el pokemon hacia los lados al iniciar la página, efectos de andar/saltar*/
+    0% {  
+        transform: rotate(5deg); 
+    } 
+    25% {  
+        transform: rotate(10deg); 
+    } 
+    75% { 
+        transform: rotate(-10deg);
+    } 
+    100% {
+        transform: rotate(-5deg); 
+    }
+}
+
+.positionPokemon:hover{                /*Efecto de ampliar cuando ponemos el ratón encima*/      
+    animation-name: first;               
+    animation-duration: 1s;   
+    animation-direction: normal;          /*Dirección*/
+    animation-timing-function: linear;    /*Velocidad*/
+    animation-fill-mode: both;       
+}
+
+@keyframes first{                         
+    0%{                                   
+        transform: scale(1,1);      /*Tamaño original*/
+    }
+    50%{                                     
+        transform: scale(1.5,1.5);  /*Ampliación*/
+    }
+    100%{                                   
+        transform: scale(1,1);      /*Vuelve a su tamaño*/
+    }
+} 
+
+#numberPokemon, #typePokemon, .live, .attack, .defense, .attackSpecial, .defenseSpecial, .speed{
+    font-size: 3vh;
+}
+
+#numberPokemon, #weightPokemon, #heightPokemon {
+    font-size: 5vh;
+    color: var(--gris);
+    margin-right: 7vh;
+}
+
+.fontColor {
+    color: var(--gris);
+    font-size: 3vh;
+}
+
+/*Id*/
+#numberPokemon{
+    grid-area: number;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*Tipos*/
+#typePokemon{
+    grid-area: type;
+}
+
+/*Peso*/
+#weightPokemon{
+    grid-area: weightPokemon;
+}
+
+/*Peso*/
+#heightPokemon{
+    grid-area: heightPokemon;
+}
+
+/*Vida*/
+.live {
+    grid-area: live; 
+}
+
+/*Ataque*/
+.attack{
+    grid-area: attack; 
+}
+
+/*Defensa*/
+.defense{
+    grid-area: defense;
+}
+
+/*Ataque especial*/
+.attackSpecial{
+    grid-area: attackSpecial; 
+}
+
+/*Defensa especial*/
+.defenseSpecial{
+    grid-area: defenseSpecial; 
+}
+
+/*Velocidad*/
+.speed{
+    grid-area: speed; 
+}
+
+.livePosition2, .defensePosition2, .defenseSpecialPosition2{ /*Valor*/
+    margin-left: -4vh;
+}
+
+.speedPosition2, .attackPosition2, .attackSpecialPosition2{ 
+    margin-left: -5vh;
+}
+
+.attackSpecialPosition{
+    margin-left: -6vh;
+    margin-right: 5vh;
+}
+
+.speedPosition{
+    margin-left: -3vh;
+}
+
+.attackPosition{
+    margin-left: -6vh;
+}
+
+.defensePosition{
+    margin-left: -4vh;
+}
+
+.livePosition{
+    margin-left: -10vh;
+}
+
+.defenseSpecialPosition{
+    margin-left: -5vh;
+    margin-right: 5vh;
+}
+
+/*Evoluciones*/
+.evolution{
+    grid-area: evolution; 
+    margin-top: -4vh; 
+    /* margin-left: -11vh; */
+
+}
+
+/*Flecha de Evolución*/
+.arrows{
+    width: 5vh;
+}
+
+#arrow1{
+    margin-top: 2vh;
+    transform: rotate(90deg); /*Lo ponemos vertical*/
+}
+
+#arrow2{
+    margin-top: -50vh;
+    transform: rotate(90deg); 
+}
+
+.imageEvolution{
+    width: 30vh;
+    margin-top: 2vh;
+}
+
+/*Pie de página*/
+footer{
+    /*Centrar Título*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--marron);
+    /* min-width:100vh; Para el ancho que se acortaba y de este modo se extiende en todas las dimensiones */
+    height: 5vh;
+    color: var(--blanco);
+}
+
+
